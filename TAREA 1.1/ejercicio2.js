@@ -1,27 +1,9 @@
-const readline = require('readline');
+const prompt = require('prompt-sync')();
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+let num1 = parseFloat(prompt("Introduce el primer número: "));
+let num2 = parseFloat(prompt("Introduce el segundo número: "));
 
-rl.question('Introduce el primer número: ', (num1) => {
-  rl.question('Introduce el segundo número: ', (num2) => {
-    num1 = parseFloat(num1);
-    num2 = parseFloat(num2);
-
-    let suma = num1 + num2;
-    let resta = num1 - num2;
-    let producto = num1 * num2;
-    let division = num2 !== 0 ? num1 / num2 : '(Indefinida division entre 0)';
-
-    console.log('\nResultados:');
-    console.log(`Suma: ${suma}`);
-    console.log(`Resta: ${resta}`);
-    console.log(`Producto: ${producto}`);
-    console.log(`División: ${division}`);
-
-    rl.close();
-  });
-});
-
+console.log(`Suma: ${num1 + num2}`);
+console.log(`Resta: ${num1 - num2}`);
+console.log(`Producto: ${num1 * num2}`);
+console.log(`División: ${num2 !== 0 ? (num1 / num2).toFixed(2) : "Error: división entre 0"}`);
