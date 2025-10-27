@@ -1,33 +1,11 @@
-// ejercicio4.js
-// Programa que pide tres números:
-// Si el primero es negativo → muestra el producto de los tres
-// Si no → muestra la suma de los tres
+const prompt = require('prompt-sync')();
 
-const readline = require("readline");
+let num1 = parseFloat(prompt("Introduce el primer número: "));
+let num2 = parseFloat(prompt("Introduce el segundo número: "));
+let num3 = parseFloat(prompt("Introduce el tercer número: "));
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-rl.question("Introduce el primer número: ", (num1) => {
-  rl.question("Introduce el segundo número: ", (num2) => {
-    rl.question("Introduce el tercer número: ", (num3) => {
-      num1 = parseFloat(num1);
-      num2 = parseFloat(num2);
-      num3 = parseFloat(num3);
-
-      if (num1 < 0) {
-        let producto = num1 * num2 * num3;
-        console.log(`\nEl primer número es negativo.`);
-        console.log(`El producto de los tres es: ${producto}`);
-      } else {
-        let suma = num1 + num2 + num3;
-        console.log(`\nEl primer número no es negativo.`);
-        console.log(`La suma de los tres es: ${suma}`);
-      }
-
-      rl.close();
-    });
-  });
-});
+if (num1 < 0) {
+    console.log(`El resultado (producto) es: ${num1 * num2 * num3}`);
+} else {
+    console.log(`El resultado (suma) es: ${num1 + num2 + num3}`);
+}
