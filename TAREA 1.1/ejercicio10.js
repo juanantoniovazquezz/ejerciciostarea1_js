@@ -1,61 +1,21 @@
-// ejercicio10.js
-// Programa que valida una fecha y la imprime con el nombre del mes
+const prompt = require('prompt-sync')();
 
-const readline = require("readline");
+const meses = ["", "enero", "febrero", "marzo", "abril", "mayo", "junio",
+               "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+let dia = parseInt(prompt("Día: "));
+let mes = parseInt(prompt("Mes (1-12): "));
+let año = parseInt(prompt("Año: "));
 
-// Array con los nombres de los meses
-const meses = [
-  "enero", "febrero", "marzo", "abril", "mayo", "junio",
-  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
-];
+const esBisiesto = a => (a % 4 === 0 && a % 100 !== 0) || (a % 400 === 0);
 
-rl.question("Introduce el día: ", (dia) => {
-  rl.question("Introduce el mes (número): ", (mes) => {
-    rl.question("Introduce el año: ", (anio) => {
-      dia = parseInt(dia);
-      mes = parseInt(mes);
-      anio = parseInt(anio);
+let maxDias = mes === 2 ? (esBisiesto(año) ? 29 : 28)
+            : [4,6,9,11].includes(mes) ? 30 : 31;
 
-      // Comprobamos que el año sea mayor que 0
-      if (anio <= 0) {
-        console.log("Error: el año debe ser mayor que 0.");
-        rl.close();
-        return;
-      }
+if (año > 0 && mes >= 1 && mes <= 12 && dia >= 1 && dia <= maxDias) {
+    console.log(`${dia} de ${meses[mes]} de ${año}`);
+} else {
+    console.log("Fecha no válida");
+}
 
-      // Comprobamos que el mes sea válido
-      if (mes < 1 || mes > 12) {
-        console.log("Error: el mes debe estar entre 1 y 12.");
-        rl.close();
-        return;
-      }
 
-      // Comprobamos el número de días según el mes
-      let diasMes;
-      switch (mes) {
-        case 2:
-          // Febrero: comprobamos si es bisiesto
-          diasMes = (anio % 4 === 0 && (anio % 100 !== 0 || anio % 400 === 0)) ? 29 : 28;
-          break;
-        case 4: case 6: case 9: case 11:
-          diasMes = 30;
-          break;
-        default:
-          diasMes = 31;
-      }
-
-      if (dia < 1 || dia > diasMes) {
-        console.log("Error: el día no es válido para ese mes.");
-      } else {
-        console.log(`${dia} de ${meses[mes - 1]} de ${anio}`);
-      }
-
-      rl.close();
-    });
-  });
-});
